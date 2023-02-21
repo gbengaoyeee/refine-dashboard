@@ -20,6 +20,8 @@ import { Login } from "pages/login";
 import { CredentialResponse } from "interfaces/google";
 import { parseJwt } from "utils/parse-jwt";
 
+import { AccountCircleOutlined, ChatBubbleOutline, PeopleAltOutlined, StarOutlineRounded, VillaOutlined } from "@mui/icons-material";
+
 const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
   const token = localStorage.getItem("token");
@@ -98,12 +100,32 @@ function App() {
           catchAll={<ErrorComponent />}
           resources={[
             {
-              name: "posts",
+              name: "property",
+              icon: <VillaOutlined />,
               list: MuiInferencer,
-              edit: MuiInferencer,
-              show: MuiInferencer,
-              create: MuiInferencer,
-              canDelete: true,
+            },
+            {
+              name: "agent",
+              icon: <PeopleAltOutlined />,
+              list: MuiInferencer,
+            },
+            {
+              name: "review",
+              icon: <StarOutlineRounded />,
+              list: MuiInferencer,
+            },
+            {
+              name: "message",
+              icon: <ChatBubbleOutline />,
+              list: MuiInferencer,
+            },
+            {
+              name: "my-profile",
+              icon: <AccountCircleOutlined />,
+              options: {
+                label: "My Profile",
+              },
+              list: MuiInferencer,
             },
           ]}
           Title={Title}
@@ -113,6 +135,7 @@ function App() {
           routerProvider={routerProvider}
           authProvider={authProvider}
           LoginPage={Login}
+          // DashboardPage={Home}
         />
       </RefineSnackbarProvider>
     </ColorModeContextProvider>
